@@ -12,7 +12,7 @@ import { UsersService } from '../services/users-service';
 })
 
 export class UsersComponent implements OnInit {
-	users: User[];
+	users: any[];
 
 	
 
@@ -27,7 +27,7 @@ export class UsersComponent implements OnInit {
 		// }
 
 		// this.http.get('/api/users', {observe: 'response'})
-		// 	.subscribe(resp => {
+		// 	.subscribe((resp: any) => {
 		// 		// console.log(resp);
 		// 		// resp.body = users 
 		// 		this.users = resp.body;
@@ -41,12 +41,10 @@ export class UsersComponent implements OnInit {
 	}
 	
 	getUsers(): void {
-		// this.usersService.getUsers().then(users => this.users = users)
-		this.usersService.getUsers()
+		this.usersService.getUsers().subscribe(users => this.users = users)
+		// this.usersService.getUsers()
 		
-		console.log('Users are', this.users);
-		// console.log(this.users)
-
+		// console.log('Users are', this.users);
 		// this.users = this.usersService.getUsers();
 	}
 	

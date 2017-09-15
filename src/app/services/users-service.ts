@@ -33,7 +33,7 @@ export class UsersService {
 		// return this.http.get('/api/users').map(res => res.valueOf());
 
 		return this.http.get('/api/users', {observe: 'response'})
-			.map(resp => {
+			.map((resp: any) => {
 				// console.log(resp);
 				// resp.body = users 
 				this.users = resp.body;
@@ -42,7 +42,6 @@ export class UsersService {
 			})
 
 		// return this.users;
-		// return this.http.jsonp.get('/api/users').map
 
 		// console.log(this.extractData);
 		// return response;
