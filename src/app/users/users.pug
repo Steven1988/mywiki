@@ -1,0 +1,13 @@
+div
+	h3 Here is a list of users :D
+
+	table.table.table-striped
+		thead
+			tr
+				th Id
+				th Name
+		tbody
+			tr(*ngFor="let user of users")
+				td {{ user._id }}
+				td {{ user.name }}
+	

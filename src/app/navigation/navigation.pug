@@ -1,0 +1,21 @@
+nav.navbar.navbar-default
+	div.container-fluid
+		div.navbar-header
+			//- button.navbar-toggle.collapsed(type="button" data-toggle="collapse" aria-expanded="false")
+			a.navbar-brand(routerLink="") MyWiki
+		ul.nav.navbar-nav(*ngFor="let item of navItems")
+			li
+				a(routerLink="{{item.routerlink}}") {{ item.name }}
+
+		form.navbar-form.navbar-right
+			div.form-group
+				input.form-control(type="text" placeholder="Search")
+			button.btn.btn-default(type="submit") Search
+
+	//- button#button.btn.btn-success((click)="hgiefugiefh") Nima
+	//- p Hey man
+
+//- #users
+//- 	ul 
+//- 		li Here is a list
+//- 		li Nooop
