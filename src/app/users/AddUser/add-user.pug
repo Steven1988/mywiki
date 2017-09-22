@@ -1,0 +1,9 @@
+
+div.addUser
+
+	input.form-control((ngModel)="nUser.name" name="name" placeholder="Add User")
+	
+	button.btn.btn-default((click)="AddUser(nUser.name)") Add 
+	p.name {{ nUser.name }}
+	//- p {{ message }}
+

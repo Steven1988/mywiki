@@ -20,6 +20,7 @@ app.set('port', process.env.PORT || 3000);
 // app.set('views', path.join(__dirname, '../views'));
 app.set('view-engine', 'html');
 app.use(express.static(path.join(__dirname, '../dist')));
+app.use('/*', express.static('../dist/index.html'))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

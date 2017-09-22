@@ -13,6 +13,7 @@ import { User } from '../users/user';
 @Injectable()
 
 export class UsersService {
+	user : User;
 	users: User[];
 	constructor(private http: HttpClient) {}
 
@@ -20,6 +21,10 @@ export class UsersService {
 	// 	users: User[]
 	// }
 	private usersUrl = '/api/users';
+
+	// public addUser(): <user> {
+	// 	return this.http.post('/api/users/' + user.id)
+	// }
 
 	public getUsers(): Observable<User[]> {
 		// return [{
@@ -58,18 +63,12 @@ export class UsersService {
 		// });
 		// console.log(this.users);
 		// return this.users;
-
-
-		// return this.http.get('/api/users').subscribe(data => {
-		// 	// return data;
-		// })
-
 	}
 
-	private extractData(res: Response) {
-		// let body = res.json();
-		console.log(res);
-		return res.json();
-		// return body || { }
-	}
+	// private extractData(res: Response) {
+	// 	// let body = res.json();
+	// 	console.log(res);
+	// 	return res.json();
+	// 	// return body || { }
+	// }
 }
