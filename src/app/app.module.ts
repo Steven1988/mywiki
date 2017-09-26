@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { UsersComponent } from './users/users.component';
 import { AddUserComponent } from './users/AddUser/add-user.component';
+
+import { ReactiveFormsComponent } from './tutorials-tests/reactive-forms.component';
 
 // Services
 import { UsersService } from './services/users-service';
@@ -22,13 +24,15 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
     BrowserModule,
     HttpClientModule,
     AppRoutingModule, 
-    FormsModule
+    FormsModule, 
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
     UsersComponent,
     AddUserComponent,
-    NavigationComponent
+    NavigationComponent,
+    ReactiveFormsComponent
   ],
   providers: [ UsersService ],
   bootstrap: [ AppComponent ]

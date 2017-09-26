@@ -10,7 +10,8 @@ export class NavigationComponent implements OnInit {
 
 	navItems = [
 		{ name: 'Home', routerlink: '' }, 
-		{ name: 'Users', routerlink: 'users'}
+		{ name: 'Users', routerlink: 'users'},
+		{ name: 'Tutorials', routerlink: 'tutorials'}
 	]
 
 	ngOnInit(): void {

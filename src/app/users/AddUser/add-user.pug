@@ -1,9 +1,42 @@
 
 div.addUser
 
-	input.form-control((ngModel)="nUser.name" name="name" placeholder="Add User")
+	//- input.form-control((ngModel)="userName" name="name" placeholder="Add User" #name="ngModel")
 	
-	button.btn.btn-default((click)="AddUser(nUser.name)") Add 
-	p.name {{ nUser.name }}
-	//- p {{ message }}
+	//- button.btn.btn-default((click)="AddUser(name)") Add 
+	//- p.name {{ userName }}
+	//- //- p {{ message }}
 
+	form([formGroup]="myForm", (ngSubmit)="register(myForm)")
+		pre {{ myForm.value | json }}
+		.form-group
+			label Name
+			input.form-control(type="text" formControlName="name")
+			label Email
+			input.form-control(type="email" formControlName="email")
+			
+			button.btn(type="submit") Register User
+
+
+	//- h2 FormControl in Formgroup
+	//- form([formGroup]="myForm" novalidate (ngSubmit)="addPost(name)")
+	//- 	.form-group
+	//- 		label name
+	//- 			input.form-control(formControlName="name")
+	//- 		p {{ myForm.value | json }}
+	//- 		p {{ myForm.status | json }}
+	//- 		//- button((click)="addPost(name)") Add Post
+	//- 		input(type="submit" value="Add Post")
+
+
+
+	//- form((ngSubmit)="addPost(rForm.value)")
+	//- 	.form-container
+	//- 		h1 My Form
+	//- 		label Name
+	//- 			input(type="text" formControlName="name")
+
+	//- 		label Description
+	//- 			textarea(formControlName="description")
+
+	//- 		input(type="submit" value="submit form")

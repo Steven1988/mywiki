@@ -37,7 +37,7 @@ app.get('/api', (req, res) => {
 	res.status(200).json({ name: 'Hello World'});
 })
 app.get('/api/users', userController.index);
-app.get('/api/users/add', userController.add);
+app.post('/api/users/add', userController.add);
 app.get('/api/users/:id', userController.user);
 app.get('/api/users/delete', userController.del);
 

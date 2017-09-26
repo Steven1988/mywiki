@@ -6,7 +6,7 @@ import { User } from '../models/user'
 export let index = (req: Request, res: Response) => {
 	User.find({}, function(err, users) {
 		res.status(200).json(users);
-		console.log(users);
+		// console.log(users);
 	});
 }
 
@@ -19,14 +19,17 @@ export let user = (req: Request, res: Response) => {
 }
 
 export let add = (req: Request, res: Response) => {
-	let stefan = new User({
-		name: 'Stefan',
-		password: '1234'
-	})
-	stefan.save(function(err) {
-		if(err) throw err;
-		res.json({ success : true });
-	})
+	console.log(req.body);
+	res.json({ succuss: true })
+
+	// let stefan = new User({
+	// 	name: 'Stefan',
+	// 	password: '1234'
+	// })
+	// stefan.save(function(err) {
+	// 	if(err) throw err;
+	// 	res.json({ success : true });
+	// })
 
 
 

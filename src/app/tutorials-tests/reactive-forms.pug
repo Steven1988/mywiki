@@ -1,0 +1,11 @@
+div Form
+	form.form-group([formGroup]="myForm", (ngSubmit)="register(myForm)")
+		pre {{ myForm.value | json }}
+		label Name
+		input.form-control(type="text" name="name" formControlName="name")
+		label Email
+		input.form-control(type="email" name="email" formControlName="email")
+		label Password
+		input.form-control(type="text" name="password" formControlName="password")
+
+		button(type="submit") Register
