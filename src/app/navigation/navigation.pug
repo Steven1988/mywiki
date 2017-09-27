@@ -3,8 +3,8 @@ nav.navbar.navbar-default
 		div.navbar-header
 			//- button.navbar-toggle.collapsed(type="button" data-toggle="collapse" aria-expanded="false")
 			a.navbar-brand(routerLink="") MyWiki
-		ul.nav.navbar-nav(*ngFor="let item of navItems")
-			li
+		ul.nav.navbar-nav
+			li(*ngFor="let item of navItems")
 				a(routerLink="{{item.routerlink}}") {{ item.name }}
 
 		form.navbar-form.navbar-right

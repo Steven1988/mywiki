@@ -11,6 +11,7 @@ export class NavigationComponent implements OnInit {
 	navItems = [
 		{ name: 'Home', routerlink: '' }, 
 		{ name: 'Users', routerlink: 'users'},
+		{ name: 'Notes', routerlink: 'notes'},
 		{ name: 'Tutorials', routerlink: 'tutorials'}
 	]
 

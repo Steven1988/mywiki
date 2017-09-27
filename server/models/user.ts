@@ -12,20 +12,8 @@ export let UserSchema: Schema = new Schema({
 	userName: String, 
 	name: String,
 	password: String,
-	nickName: String
+	nickName: String,
+	email: String
 });
 
 export const User: Model<IUserModel> = model<IUserModel>('User', UserSchema);
-
-
-// var mongoose = require('mongoose');
-
-
-// const UserSchema = new mongoose.Schema({
-// 	username: String,
-// 	name: String, 
-// 	password: String
-// });
-
-// const User = mongoose.model('User', UserSchema);
-// module.exports = User;

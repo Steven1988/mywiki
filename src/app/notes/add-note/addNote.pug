@@ -1,0 +1,11 @@
+div.add-note 
+	h2 Add a new note
+.col-md-8.col-md-offset-2
+	form([formGroup]="noteForm", (submit)="addNote(noteForm)")
+		pre {{ noteForm.value | json }}
+		label Title
+		input.form-control(type="text" formControlName="title")
+		label Body
+		textarea.form-control(type="text" formControlName="body")
+
+		button.btn.btn-success(type="submit") Add Note

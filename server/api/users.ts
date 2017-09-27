@@ -1,10 +1,10 @@
 import { Request, Response } from 'express'
 import { Document, Model, model } from 'mongoose'
 
-import { User } from '../models/user'
+import { User } from '../models/user';
 
 export let index = (req: Request, res: Response) => {
-	User.find({}, function(err, users) {
+	User.find({}, (err, users) => {
 		res.status(200).json(users);
 		// console.log(users);
 	});
@@ -20,7 +20,7 @@ export let user = (req: Request, res: Response) => {
 
 export let add = (req: Request, res: Response) => {
 	console.log(req.body);
-	res.json({ succuss: true })
+	// res.json({ succuss: true })
 
 	// let stefan = new User({
 	// 	name: 'Stefan',
@@ -30,6 +30,17 @@ export let add = (req: Request, res: Response) => {
 	// 	if(err) throw err;
 	// 	res.json({ success : true });
 	// })
+
+	req.body = new User({
+		name: req.body.name,
+		password: req.body.password,
+		email: req.body.email
+	})
+	req.body.save(function(err: any) {
+		if(err) throw err;
+		res.json({ success : true });
+	})
+	// db.collection.insert()
 
 
 

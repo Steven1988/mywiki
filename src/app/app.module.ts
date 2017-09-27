@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { UsersComponent } from './users/users.component';
 import { AddUserComponent } from './users/AddUser/add-user.component';
+import { NotesComponent } from './notes/notes.component';
+import { AddNoteComponent } from './notes/add-note/add-note.component';
 
 import { ReactiveFormsComponent } from './tutorials-tests/reactive-forms.component';
 
@@ -29,9 +31,11 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
   ],
   declarations: [
     AppComponent,
+    NavigationComponent,    
     UsersComponent,
     AddUserComponent,
-    NavigationComponent,
+    NotesComponent,
+    AddNoteComponent,
     ReactiveFormsComponent
   ],
   providers: [ UsersService ],

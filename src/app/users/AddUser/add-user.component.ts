@@ -8,13 +8,6 @@ import { User } from '../user';
 
 @Component({
 	selector: 'addUser',
-	// template: `
-	// <div class="addUser">
-	//   <input [(ngModel)]="nUser.name" name="name" placeholder="Add User" class="form-control"/>
-	//   <button (click)="AddUser(nUser.name)" class="btn btn-default">Add </button>
-	//   <p class="name">{{ nUser.name }}</p>
-	// </div>
-	// `,
 	templateUrl: './add-user.pug'
 })
 

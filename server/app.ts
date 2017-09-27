@@ -7,7 +7,8 @@ import * as mongoose from 'mongoose'
 
 // import * as pug from 'pug'
 
-import * as userController from './api/users'
+import * as userController from './api/users';
+import * as noteRoutes from './api/notesRoute';
 
 const app = express();
 
@@ -29,9 +30,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // routes ---
-// app.get('/', function(req, res) {
-// 	res.send('Hello World!');
-// });
 app.get('/api', (req, res) => {
 	// return 'index.html';
 	res.status(200).json({ name: 'Hello World'});
@@ -40,6 +38,10 @@ app.get('/api/users', userController.index);
 app.post('/api/users/add', userController.add);
 app.get('/api/users/:id', userController.user);
 app.get('/api/users/delete', userController.del);
+
+app.get('/api/notes', noteRoutes.index);
+app.post('/api/notes/add', noteRoutes.add);
+
 
 
 app.listen(app.get('port'), function() {

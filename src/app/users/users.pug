@@ -1,4 +1,4 @@
-div
+div#users
 	h3 Here is a list of users :D
 
 	table.table.table-striped
@@ -6,10 +6,12 @@ div
 			tr
 				th Id
 				th Name
-		tbody
+				th Password
+		tbody.tBody
 			tr(*ngFor="let user of users")
 				td {{ user._id }}
 				td {{ user.name }}
+				td {{ user.password }}
 
 	addUser
 	

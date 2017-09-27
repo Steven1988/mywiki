@@ -42,7 +42,7 @@ export class UsersService {
 				// console.log(resp);
 				// resp.body = users 
 				this.users = resp.body;
-				console.log(this.users);
+				// console.log(this.users);
 				return this.users;
 			})
 
