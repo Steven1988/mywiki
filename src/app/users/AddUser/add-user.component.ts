@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 // import { NgModel } from '@angular/forms';
 
 import { User } from '../user';
+import { UsersService } from '../../services/users-service';
 
 
 @Component({
@@ -17,9 +18,11 @@ export class AddUserComponent implements OnInit {
 	post: any;
 	// description: string;
 	name: string;
+	username: string;
+	password: string;
 	email: string;
 
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient, private usersService: UsersService) {}
 	// constructor(private fb: FormBuilder) {
 	// 	// this.createForm();
 	// 	this.myForm = this.fb.group({
@@ -36,6 +39,8 @@ export class AddUserComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.myForm = new FormGroup({
+			username: new FormControl(),
+			password: new FormControl(),
 			name: new FormControl(),
 			email: new FormControl()
 		})
@@ -43,15 +48,18 @@ export class AddUserComponent implements OnInit {
 
 	register(myForm: NgForm) {
 		console.log(myForm.value);
+		this.username = myForm.value.username;
+		this.password = myForm.value.password;
 		this.name = myForm.value.name;
 		this.email = myForm.value.email;
+
+		this.usersService.AddUser(myForm.value).subscribe()
 		
-		this.http.post('/api/users/add', myForm.value).subscribe();
+		// this.http.post('/api/users/add', myForm.value).subscribe();
 	} 
 
 	update(value: string) {
 		console.log(value)
 		// this.value = value
 	}
-
 }

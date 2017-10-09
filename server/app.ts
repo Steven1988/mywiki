@@ -2,13 +2,15 @@
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as path from 'path'
-import * as mongoose from 'mongoose'
+import * as mongoose from 'mongoose';
+import * as jwt from 'jsonwebtoken';
+
 // import * as mongo from 'mongodb'
 
-// import * as pug from 'pug'
 
 import * as userController from './api/users';
 import * as noteRoutes from './api/notesRoute';
+import * as authenticate from './api/auth';
 
 const app = express();
 
@@ -37,10 +39,15 @@ app.get('/api', (req, res) => {
 app.get('/api/users', userController.index);
 app.post('/api/users/add', userController.add);
 app.get('/api/users/:id', userController.user);
-app.get('/api/users/delete', userController.del);
+app.delete('/api/users/delete/:id', userController.del);
 
 app.get('/api/notes', noteRoutes.index);
 app.post('/api/notes/add', noteRoutes.add);
+app.delete('/api/notes/del/:id', noteRoutes.del);
+
+app.post('/api/authenticate', authenticate.auth);
+
+
 
 
 

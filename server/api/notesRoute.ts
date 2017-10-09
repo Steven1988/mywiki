@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { Document, Model, model } from 'mongoose';
+import mongoose = require('mongoose');
+mongoose.Promise = require('Bluebird');
 
 import { Note } from '../models/note';
 
@@ -10,23 +12,26 @@ export let index = (req: Request, res: Response) => {
 } 
 
 export let add = (req: Request, res: Response) => {
-
-	console.log(req.body);
-	let newNote = new Note({
+	req.body = new Note({
 		title: req.body.title,
-		body: req.body.body,
-	})
-	newNote.save( (err: any) => {
-		if (err) throw err;
-		res.json({ success: true, mes: 'Note added' })
-	})
+		body: req.body.body
+	});
+	// console.log(newNote);
 
-	// let stefan = new Note({
-	// 	title: 'Stefan',
-	// 	body: 'Totally new note in my system.'
-	// })
-	// stefan.save(function(err: any) {
-	// 	if(err) throw err;
-	// 	res.json({ success : true });
-	// })
+	req.body.save((err: any) => {
+		if (err) throw err;
+		res.json({ success: true, mes: 'Note added', object: req.body });
+	});
+}
+
+export let del = (req: Request, res: Response) => {
+	// console.log('Delete Note Route');
+
+	let noteId: string = req.params.id;
+	// console.log(req.params.id);
+	Note.findByIdAndRemove(noteId, (err, note) => {
+		if (err) throw err;
+		console.log(noteId + ' Note deleted');
+		res.status(200).json(note);
+	});
 }

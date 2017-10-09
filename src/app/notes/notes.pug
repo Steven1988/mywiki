@@ -8,6 +8,7 @@ h1 Here is the Notes
 				li.list-group-item(*ngFor=" let note of notes")
 					a() {{ note.title }}
 					p {{ note.body }}
+					button.btn.btn-danger((click)="deleteNote(note)") Delete
 
 	.col-md-8
 		.well

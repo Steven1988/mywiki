@@ -9,10 +9,9 @@ export interface IUserModel extends IUser, Document {
 
 export let UserSchema: Schema = new Schema({
 	createdAt: Date,
-	userName: String, 
+	username: String, 
 	name: String,
 	password: String,
-	nickName: String,
 	email: String
 });
 

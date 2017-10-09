@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -46,23 +46,17 @@ export class UsersService {
 				return this.users;
 			})
 
-		// return this.users;
+	}
+	public AddUser(user: any): Observable<any> {
 
-		// console.log(this.extractData);
-		// return response;
+		const headers = new HttpHeaders().set('Content-Type', 'application/json')
 
-		// this.http.get(this.usersUrl).subscribe(data => {
-			// this.users = data;
-		// })
+		return this.http.post('/api/users/add', user, { headers }).map((resp: HttpResponse<Object>) => {resp.ok, console.log(resp)})
+	}
 
-
-		// return this.http.get('/api/users').subscribe(data => {
-		// 	let users = data;
-		// 	console.log(data);
-		// 	return this.users;	
-		// });
-		// console.log(this.users);
-		// return this.users;
+	public deleteUser(user: any): Observable<any> {
+		console.log('delete function in U Service')
+		return this.http.delete('/api/users/delete/' + user._id).map((resp: HttpResponse<Object>) => resp.ok);
 	}
 
 	// private extractData(res: Response) {

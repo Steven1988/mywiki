@@ -10,10 +10,16 @@ div.addUser
 	form([formGroup]="myForm", (ngSubmit)="register(myForm)")
 		pre {{ myForm.value | json }}
 		.form-group
-			label Name
-			input.form-control(type="text" formControlName="name")
+			label Username
+			input.form-control(type="text" formControlName="username")
+
+			label Password
+			input.form-control(type="password" formControlName="password")
 			label Email
 			input.form-control(type="email" formControlName="email")
+			
+			label Name
+			input.form-control(type="text" formControlName="name")
 			
 			button.btn(type="submit") Register User
 

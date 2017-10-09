@@ -48,6 +48,11 @@ export class UsersComponent implements OnInit {
 		// this.users = this.usersService.getUsers();
 	}
 	
+	deleteUser(user: any): void {
+		// console.log('delete function in U component')
+		this.usersService.deleteUser(user).subscribe();
+	}
+
 
 
 

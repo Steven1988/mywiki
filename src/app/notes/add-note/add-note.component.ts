@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
+import { NotesService } from '../../services/notes-service';
+
 @Component({
 	selector: 'addNote',
 	templateUrl: 'addNote.pug'
@@ -12,7 +14,7 @@ export class AddNoteComponent implements OnInit {
 	title: string;
 	body: string;
 
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient, private notesService: NotesService) {}
 
 	ngOnInit(): void {
 		this.noteForm = new FormGroup({
@@ -26,6 +28,7 @@ export class AddNoteComponent implements OnInit {
 		this.title = noteForm.value.title;
 		this.body = noteForm.value.body;
 
-		this.http.post('api/notes/add', noteForm.value).subscribe()
+		this.notesService.addNote(noteForm.value).subscribe();
+		// this.http.post('api/notes/add', noteForm.value).subscribe();
 	}
 }

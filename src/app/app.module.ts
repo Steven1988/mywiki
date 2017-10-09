@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 
@@ -17,6 +17,8 @@ import { ReactiveFormsComponent } from './tutorials-tests/reactive-forms.compone
 
 // Services
 import { UsersService } from './services/users-service';
+import { NotesService } from './services/notes-service';
+import { MyIntercepter } from './interceptors/my.interceptor';
 
 // Routing
 import { AppRoutingModule } from './app-routing/app-routing.module'
@@ -38,7 +40,9 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
     AddNoteComponent,
     ReactiveFormsComponent
   ],
-  providers: [ UsersService ],
+  providers: [ UsersService, NotesService,
+    { provide: HTTP_INTERCEPTORS, useClass: MyIntercepter, multi: true } 
+    ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

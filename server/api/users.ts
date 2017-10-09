@@ -19,7 +19,7 @@ export let user = (req: Request, res: Response) => {
 }
 
 export let add = (req: Request, res: Response) => {
-	console.log(req.body);
+	console.log(req.body.username);
 	// res.json({ succuss: true })
 
 	// let stefan = new User({
@@ -32,11 +32,12 @@ export let add = (req: Request, res: Response) => {
 	// })
 
 	req.body = new User({
+		username: req.body.username,
 		name: req.body.name,
 		password: req.body.password,
 		email: req.body.email
 	})
-	req.body.save(function(err: any) {
+	req.body.save((err: any) => {
 		if(err) throw err;
 		res.json({ success : true });
 	})
@@ -52,12 +53,12 @@ export let add = (req: Request, res: Response) => {
 }
 
 export let del = (req: Request, res: Response) => {
-	console.log('Delete route');
-	let id: string = '598c4fc51917ac1858856ce6'
+	// console.log('Delete route');
+	// let id: string = '598c4fc51917ac1858856ce6'
 
-	User.findByIdAndRemove(id, function(err, user) {
+	User.findByIdAndRemove(req.params.id, (err, user) => {
 		if (err) throw err;
-		console.log(id + ' User deleted');
+		console.log(req.params.id + ' User deleted');
 		res.status(200).json(user);
 		
 	})
