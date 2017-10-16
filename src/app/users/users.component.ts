@@ -1,5 +1,6 @@
 import { Component, Input, OnInit,  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { RouterModule, Router, Routes } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 import { User } from './user';
@@ -15,7 +16,7 @@ export class UsersComponent implements OnInit {
 	users: User[];
 	
 
-	constructor(private http: HttpClient, private usersService: UsersService) {}
+	constructor(private http: HttpClient, private usersService: UsersService, private router: Router) {}
 	
 	// @Input() newUser: User;
 	
@@ -51,6 +52,13 @@ export class UsersComponent implements OnInit {
 	deleteUser(user: any): void {
 		// console.log('delete function in U component')
 		this.usersService.deleteUser(user).subscribe();
+		this.goTo('/users')
+	}
+
+	goTo(path: string): void {
+		console.log(path);
+		this.router.navigateByUrl(path);
+
 	}
 
 

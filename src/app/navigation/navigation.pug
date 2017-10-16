@@ -6,11 +6,16 @@ nav.navbar.navbar-default
 		ul.nav.navbar-nav
 			li(*ngFor="let item of navItems")
 				a(routerLink="{{item.routerlink}}") {{ item.name }}
-
+		
+		ul.nav.navbar-nav.login
+			li
+				a(routerLink="login") Sign in
+		
 		form.navbar-form.navbar-right
 			div.form-group
 				input.form-control(type="text" placeholder="Search")
 			button.btn.btn-default(type="submit") Search
+		
 
 	//- button#button.btn.btn-success((click)="hgiefugiefh") Nima
 	//- p Hey man

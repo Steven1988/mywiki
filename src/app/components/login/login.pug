@@ -1,0 +1,16 @@
+ 
+.row
+	.col-md-8.col-md-offset-2
+		h3 This is my login page
+		.panel
+			form.form-group.login-form([formGroup]="loginForm", (submit)="login(loginForm)")
+
+				input.form-control(type="text" placeholder="Username" formControlName="username")
+				input.form-control(type="password" placeholder="Password" formControlName="password")
+
+				button.btn.btn-success(type="submit") Sign In
+
+				p Message: 
+					span.errorMes {{ errorMessage }}
+
+

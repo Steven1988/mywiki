@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { RouterModule, Router, Routes } from '@angular/router';
+
 // import { NgModel } from '@angular/forms';
 
 import { User } from '../user';
@@ -22,7 +24,9 @@ export class AddUserComponent implements OnInit {
 	password: string;
 	email: string;
 
-	constructor(private http: HttpClient, private usersService: UsersService) {}
+	constructor(private http: HttpClient, private usersService: UsersService, private router: Router) {
+		this.router = router;
+	}
 	// constructor(private fb: FormBuilder) {
 	// 	// this.createForm();
 	// 	this.myForm = this.fb.group({
@@ -54,6 +58,8 @@ export class AddUserComponent implements OnInit {
 		this.email = myForm.value.email;
 
 		this.usersService.AddUser(myForm.value).subscribe()
+
+		this.goTo('users')
 		
 		// this.http.post('/api/users/add', myForm.value).subscribe();
 	} 
@@ -61,5 +67,10 @@ export class AddUserComponent implements OnInit {
 	update(value: string) {
 		console.log(value)
 		// this.value = value
+	}
+
+	goTo(path: string): void {
+		console.log(path);
+		this.router.navigate([path]);
 	}
 }

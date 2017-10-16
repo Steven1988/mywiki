@@ -4,7 +4,7 @@ import * as bodyParser from 'body-parser'
 import * as path from 'path'
 import * as mongoose from 'mongoose';
 import * as jwt from 'jsonwebtoken';
-
+import { config } from './config';
 // import * as mongo from 'mongodb'
 
 
@@ -12,11 +12,12 @@ import * as userController from './api/users';
 import * as noteRoutes from './api/notesRoute';
 import * as authenticate from './api/auth';
 
-const app = express();
+export const app = express();
 
 const promise = mongoose.connect('mongodb://localhost:27017/data', {
 	useMongoClient: true
 });
+app.set('superSecret', config.secret);
 
 
 app.set('port', process.env.PORT || 3000);
