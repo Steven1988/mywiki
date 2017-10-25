@@ -7,7 +7,11 @@ h1 Here is the Notes
 			ul.list-groups
 				li.list-group-item(*ngFor=" let note of notes")
 					a() {{ note.title }}
+					p Date: 
+						span {{ note.createdDate | date }}
 					p {{ note.body }}
+					p User: 
+						span {{ note.user }}
 					button.btn.btn-danger((click)="deleteNote(note)") Delete
 
 	.col-md-8

@@ -20,7 +20,7 @@ export class NotesService {
 	
 	// intercept(req: HttpRequest<string>, next: HttpHandler) : Observable<HttpEvent<any>> {
 		
-	// }S
+	// }
 	public addNote(note: any): Observable<any> {
 
 		// const endHeaders = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })

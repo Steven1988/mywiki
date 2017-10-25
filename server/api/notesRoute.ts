@@ -1,6 +1,10 @@
 import { Request, Response } from 'express';
 import { Document, Model, model } from 'mongoose';
 import mongoose = require('mongoose');
+
+import { app } from '../app';
+import * as jwt from 'jsonwebtoken';
+
 mongoose.Promise = require('Bluebird');
 
 import { Note } from '../models/note';
@@ -12,13 +16,25 @@ export let index = (req: Request, res: Response) => {
 } 
 
 export let add = (req: Request, res: Response) => {
-	req.body = new Note({
+	if(!req.body) return res.sendStatus(400);
+
+	let token: string = req.body.token
+	// console.log(req.body.token);
+
+	let decoded = jwt.decode(token, app.get('superSecret'));
+	// const decoded = jwt.decode(token, {complete: true});
+
+	console.log('decoded token: ', decoded);
+
+	let newNote = new Note({
+		createdDate: req.body.date,
 		title: req.body.title,
-		body: req.body.body
+		body: req.body.body,
+		user: decoded
 	});
 	// console.log(newNote);
 
-	req.body.save((err: any) => {
+	newNote.save((err: any) => {
 		if (err) throw err;
 		res.json({ success: true, mes: 'Note added', object: req.body });
 	});
