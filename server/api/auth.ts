@@ -43,3 +43,11 @@ export let auth = (req: Request, res: Response) => {
 	})
 
 }
+export let logout = (req: Request, res: Response) => {
+	return res.json({
+		success: true,
+		message: 'You are logged out',
+		token: '',
+		name: ''
+	})
+}

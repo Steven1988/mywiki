@@ -21,6 +21,7 @@ import { ReactiveFormsComponent } from './tutorials-tests/reactive-forms.compone
 import { UsersService } from './services/users-service';
 import { NotesService } from './services/notes-service';
 import { AuthService } from './services/auth.service';
+import { AuthGuard } from './_guards/auth.guard';
 import { MyIntercepter } from './interceptors/my.interceptor';
 
 // Routing
@@ -45,7 +46,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
     LoginComponent,
     ReactiveFormsComponent
   ],
-  providers: [ UsersService, NotesService, AuthService,
+  providers: [ UsersService, NotesService, AuthGuard, AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: MyIntercepter, multi: true } 
     ],
   bootstrap: [ AppComponent ]

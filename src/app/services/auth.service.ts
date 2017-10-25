@@ -18,17 +18,30 @@ export class AuthService {
 
 		const headers = new HttpHeaders().set('Content-Type', 'application/json')
 
-		this.http.post('api/authenticate', JSON.stringify({username: username, password: password}), {headers}).map((res: Response) => {
-			console.log(res)
-			let token = res.token;
-			if(token) {
-				this.token = token;
-				localStorage.setItem('currentUser', JSON.stringify({username: username, token: token}));
-				console.log(localStorage);
-				return res;
-			}
+		return this.http.post('api/authenticate', JSON.stringify({username: username, password: password}), {headers}).map((res: Response) => {
+			// console.log('HAAAlloooo', res)
+			return res;
+			// let token = res.token;
+			// if(token) {
+			// 	this.token = token;
+			// 	localStorage.setItem('currentUser', JSON.stringify({username: username, token: token}));
+			// 	// localStorage.currentUser = {username: username, token: token}
+			// 	// localStorage.token = res.token;
+			// 	console.log(localStorage);
+			// 	return res;
+			// }
+			// if(!token) {
+			// 	// console.log(res.message);
+			// 	return res;
+			// }
 		})
 	}
 
+	logout(user: any): any {
+		return this.http.get('api/logout').map((res: Response) => {
+			localStorage.clear();
+			console.log(res);
+		})
+	} 
 
 }

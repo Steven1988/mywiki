@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
 	errorMessage: string;
 	loginSuccess: boolean;
 	token: string;
-	loginRes: any;
 
 
 	constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
@@ -38,13 +37,19 @@ export class LoginComponent implements OnInit {
 
 		const headers = new HttpHeaders().set('Content-Type', 'application/json')
 
-		this.authService.login(this.username, this.password).subscribe(res => this.loginRes);
+		this.authService.login(this.username, this.password).subscribe(res => {
+			if(res.token) {
+				localStorage.token = res.token;
+				localStorage.name = res.name;
+				localStorage.userId = res.userid;
+				console.log(res.name);
+				this.goTo('');
+			} 
+			else if (!res.token) {
+				this.errorMessage = res.message;
+			}
 
-		// this.goTo('')
-		console.log(this.loginRes);
-
-		this.errorMessage = this.loginRes;
-
+		});
 
 		// this.http.post('api/authenticate', user.value, { headers }).map((res: Response) => {
 		// 	res.ok;
@@ -52,12 +57,9 @@ export class LoginComponent implements OnInit {
 		// 	this.errorMessage = res.message;
 		// 	this.loginSuccess = res.success;
 		// 	this.storeToken(res);
-		// }).subscribe();
-		
-
-		
-
+		// }).subscribe()
 	}
+
 	storeToken(data: any) {
 		// console.log(data)
 		if (this.loginSuccess == false) {
@@ -72,7 +74,7 @@ export class LoginComponent implements OnInit {
 		}
 	}
 	goTo(path: string): void {
-		console.log(path);
+		// console.log(path);
 		this.router.navigate([path]);
 	}
 }

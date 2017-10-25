@@ -47,6 +47,7 @@ app.post('/api/notes/add', noteRoutes.add);
 app.delete('/api/notes/del/:id', noteRoutes.del);
 
 app.post('/api/authenticate', authenticate.auth);
+app.get('/api/logout', authenticate.logout);
 
 
 

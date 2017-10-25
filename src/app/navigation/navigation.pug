@@ -8,8 +8,14 @@ nav.navbar.navbar-default
 				a(routerLink="{{item.routerlink}}") {{ item.name }}
 		
 		ul.nav.navbar-nav.login
-			li
+			li(*ngIf="currentUser")
+				a()
+					span Hello 
+					span {{ currentUser }}
+			li(*ngIf="!currentUser")
 				a(routerLink="login") Sign in
+			li(*ngIf="currentUser")
+				button.btn((click)="logout()") Logout
 		
 		form.navbar-form.navbar-right
 			div.form-group
