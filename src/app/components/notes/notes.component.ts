@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { RequestOptionsArgs } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
 import { Note } from './note';
-import { NotesService } from '../services/notes-service';
+import { NotesService } from '../../services/notes-service';
 
 @Component({
 	selector: 'notes',
@@ -14,26 +14,23 @@ import { NotesService } from '../services/notes-service';
 
 export class NotesComponent implements OnInit {
 	notes: Note[];
-	// headers: HttpHeaders;
-
-
+	headers: HttpHeaders;
 
 	constructor(private http: HttpClient, private notesService: NotesService) {
 		// this.headers = new HttpHeaders({
-		// 	'Content-Type': 'application/json;charset=utf-8'
+		// 	'Content-Type': 'application/json;charset=utf-8',
+		// 	Authorization: 'Bearer ${localStorage.token}'
 		// });
 	}
-	private headers = new Headers({ 'Content-Type': 'application/json' })
 	
-	// intercept(req: HttpRequest<string>, next: HttpHandler) : Observable<HttpEvent><any> {
-	// 	const headers = {
-	// 		'Content-Type': 'application/json';
-	// 	}
-		
-	// }
 	ngOnInit(): void {
+		// let headers = new HttpHeaders().set('Content-Type', 'application/json' Authorization, 'Bearer ${localStorage.token}')
+		let headers = new HttpHeaders().set('Content-Type','application/json').set('x-access-token', localStorage.token).set('User', localStorage.userId);
 
-		this.http.get('api/notes', {observe: 'response'})
+		// let headers = new Headers({ 'Content-Type': 'application/json', Authorization: 'Bearer ${localStorage.token}'})
+		console.log(headers);
+
+		this.http.get('api/notes', {observe: 'response', headers: headers})
 			.subscribe((resp: any) => {
 				console.log(resp.body);
 				this.notes = resp.body;
@@ -48,9 +45,6 @@ export class NotesComponent implements OnInit {
 		// let options = new RequestOptionsArgs({ headers: Theheaders, body: note});
 		this.notesService.deleteNote(note).subscribe(); 
 	
-		// console.log('delete function', note);
-		// this.http.delete('api/notes/del', {headers: this.headers}).subscribe()
-		// this.http.delete('api/notes/del', note).subscribe(result => console.log(result), error => console.log('error'));
 	}
 
 }

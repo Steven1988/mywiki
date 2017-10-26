@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
 				localStorage.name = res.name;
 				localStorage.userId = res.userid;
 				console.log(res.name);
+
 				this.goTo('');
 			} 
 			else if (!res.token) {
@@ -76,5 +77,7 @@ export class LoginComponent implements OnInit {
 	goTo(path: string): void {
 		// console.log(path);
 		this.router.navigate([path]);
+		
+		location.reload();
 	}
 }

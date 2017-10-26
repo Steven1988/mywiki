@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 // import { Http } from '@angular/Http';
 
-import { User } from '../users/user';
+import { User } from '../components/users/user';
 
 @Injectable()
 

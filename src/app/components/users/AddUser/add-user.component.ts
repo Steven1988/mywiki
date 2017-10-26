@@ -6,7 +6,7 @@ import { RouterModule, Router, Routes } from '@angular/router';
 // import { NgModel } from '@angular/forms';
 
 import { User } from '../user';
-import { UsersService } from '../../services/users-service';
+import { UsersService } from '../../../services/users-service';
 
 
 @Component({

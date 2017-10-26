@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule, Router, Routes } from '@angular/router';
+
 // import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http'; 
 
 import { AuthService } from '../services/auth.service';
@@ -13,7 +15,7 @@ export class NavigationComponent implements OnInit {
 	// navItems: object[]
 	currentUser: string;
 
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private router: Router) {}
 
 	navItems = [
 		{ name: 'Home', routerlink: '' }, 
@@ -23,7 +25,7 @@ export class NavigationComponent implements OnInit {
 	]
 
 	ngOnInit(): void {
-		console.log(this.currentUser);
+		// console.log(this.currentUser);
 		this.currentUser = localStorage.name;
 
 		// if(localStorage.length > 1) {
@@ -46,6 +48,7 @@ export class NavigationComponent implements OnInit {
 		// localStorage.clear();
 		// console.log(localStorage);
 		this.authService.logout(localStorage.currentUser).subscribe();
+		// location.reload();
 	}
 
 }

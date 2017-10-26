@@ -4,7 +4,7 @@ import { RouterModule, Router, Routes } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 import { User } from './user';
-import { UsersService } from '../services/users-service';
+import { UsersService } from '../../services/users-service';
 
 @Component({
 	selector: 'users',

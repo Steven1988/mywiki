@@ -12,19 +12,14 @@ import 'rxjs/add/operator/map';
 export class NotesService {
 	constructor(private http: HttpClient) {}
 
-	// private headers = new Headers({ 'Content-Type': 'application/json' });
-	// private encHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded' })
-	// private encHeaders = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-	// public encHeaders = { 'Content-Type': 'application/x-www-form-urlencoded' }
-
 	
-	// intercept(req: HttpRequest<string>, next: HttpHandler) : Observable<HttpEvent<any>> {
-		
-	// }
 	public addNote(note: any): Observable<any> {
 
 		// const endHeaders = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-		const headers = new HttpHeaders().set('Content-Type', 'application/json')
+		// const headers = new HttpHeaders().set('Content-Type', 'application/json')
+		let headers = new HttpHeaders().append('Content-Type','application/json').append('x-access-token', localStorage.token)
+
+		// console.log('The Note is here ', note);
 
 		return this.http.post('api/notes/add', note, { headers }).map((resp: HttpResponse<Object>) => {resp.ok; console.log(resp)})
 	}

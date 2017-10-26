@@ -10,6 +10,7 @@ import { config } from './config';
 
 import * as userController from './api/users';
 import * as noteRoutes from './api/notesRoute';
+import * as categoryRoutes from './api/categoryRoute';
 import * as authenticate from './api/auth';
 
 export const app = express();
@@ -37,6 +38,11 @@ app.get('/api', (req, res) => {
 	// return 'index.html';
 	res.status(200).json({ name: 'Hello World'});
 })
+
+app.get('/api/logout', authenticate.logout);
+app.post('/api/authenticate', authenticate.auth);
+app.use(authenticate.use);
+
 app.get('/api/users', userController.index);
 app.post('/api/users/add', userController.add);
 app.get('/api/users/:id', userController.user);
@@ -46,9 +52,8 @@ app.get('/api/notes', noteRoutes.index);
 app.post('/api/notes/add', noteRoutes.add);
 app.delete('/api/notes/del/:id', noteRoutes.del);
 
-app.post('/api/authenticate', authenticate.auth);
-app.get('/api/logout', authenticate.logout);
-
+app.get('/api/categories', categoryRoutes.index);
+app.get('/api/categories/add', categoryRoutes.add);
 
 
 

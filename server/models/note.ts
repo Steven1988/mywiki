@@ -8,9 +8,8 @@ export let NoteSchema: Schema = new Schema({
 	createdDate: Date,
 	title: String,
 	body: String,
-	user: { type: Schema.Types.ObjectId, ref: 'User' }
-
-
+	user: { type: Schema.Types.ObjectId, ref: 'User' },
+	category: { type: Schema.Types.ObjectId, ref: 'Category' }
 });
 
 export const Note: Model<INoteModel> = model<INoteModel>('Note', NoteSchema);

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { Document, Model, model } from 'mongoose';
 import mongoose = require('mongoose');
 
@@ -8,31 +8,52 @@ import * as jwt from 'jsonwebtoken';
 mongoose.Promise = require('Bluebird');
 
 import { Note } from '../models/note';
+import { Category } from '../models/category';
+import * as categoryRoutes  from './categoryRoute';
 
-export let index = (req: Request, res: Response) => {
-	Note.find({}, (err, notes) => {
+
+
+export let index = (req: Request, res: Response, next: NextFunction) => {
+	Note.find({user: req.headers.user},(err, notes) => {
+		// console.log('user Id is: ', req.headers.['user-Id']);
+		if (err) {
+			return next(err);
+		}
 		res.status(200).json(notes);
 	});
 } 
 
-export let add = (req: Request, res: Response) => {
+export let add = (req: Request, res: Response, next: NextFunction) => {
 	if(!req.body) return res.sendStatus(400);
 
-	let token: string = req.body.token
-	// console.log(req.body.token);
+	let token = req.headers['x-access-token'];
+	// let decoded: any = jwt.decode(token, app.get('superSecret'));
+	let decoded: any = jwt.decode(token, {complete: true});
 
-	let decoded = jwt.decode(token, app.get('superSecret'));
-	// const decoded = jwt.decode(token, {complete: true});
-
-	console.log('decoded token: ', decoded);
+	console.log('decoded token: ', decoded.payload);
+	// console.log('token: ', token);
 
 	let newNote = new Note({
 		createdDate: req.body.date,
 		title: req.body.title,
 		body: req.body.body,
-		user: decoded
-	});
+		user: decoded.payload
+	});	
+
+	// let categories = Category.find({}, (err, data) => {
+	// 	if (err) {
+	// 		return next(err);
+	// 	}
+	// 	res.json(data);
+	// })
 	// console.log(newNote);
+	let newCategory = new Category({
+		name: req.body.category
+	}) 
+
+	// console.log(categories);
+
+	console.log(newCategory);
 
 	newNote.save((err: any) => {
 		if (err) throw err;
