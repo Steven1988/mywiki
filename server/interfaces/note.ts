@@ -3,4 +3,5 @@ export interface INote {
 	title?: string;
 	body?: string;
 	user?: object;
+	category?: object;
 }

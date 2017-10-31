@@ -27,9 +27,11 @@ export class NotesService {
 	public deleteNote(note: any): Observable<any> { 
 		
 		console.log('Delete Route in Notes Service', note);
+		let headers = new HttpHeaders().append('Content-Type','application/json').append('x-access-token', localStorage.token)
+
 		// let options = new RequestOptionsArgs({ headers: this.headers, body: note});
 
-		return this.http.delete('api/notes/del/' + note._id).map((resp: HttpResponse<Object>) => resp.ok);
+		return this.http.delete('api/notes/del/' + note._id, { headers }).map((resp: HttpResponse<Object>) => resp.ok);
 	}
 	// 	let headers = new Headers({ 'Content-Type': 'application/json' });
 	//  	// let options = new RequestOptionsArgs({ headers: headers, body: note });

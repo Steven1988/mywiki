@@ -30,35 +30,42 @@ export let add = (req: Request, res: Response, next: NextFunction) => {
 	// let decoded: any = jwt.decode(token, app.get('superSecret'));
 	let decoded: any = jwt.decode(token, {complete: true});
 
-	console.log('decoded token: ', decoded.payload);
+	// console.log('decoded token: ', decoded.payload);
 	// console.log('token: ', token);
 
-	let newNote = new Note({
-		createdDate: req.body.date,
-		title: req.body.title,
-		body: req.body.body,
-		user: decoded.payload
-	});	
+	// Check if the category added exist in the document. 
+	Category.find({ name: req.body.category }, (err: any, data: any) => {
+		let currentCategory: string;
+		if (err) {
+			return next(err);
+		}
+		if(data.length == 0) {
+			let newCategory = new Category({
+				name: req.body.category
+			});
+			// console.log('ADDED Cat:', newCategory);
+			newCategory.save((err: any) => {
+				if(err) throw err;	
+			});
+			currentCategory = newCategory._id
+		} else {
+			currentCategory = data[0]._id;
+		}
 
-	// let categories = Category.find({}, (err, data) => {
-	// 	if (err) {
-	// 		return next(err);
-	// 	}
-	// 	res.json(data);
-	// })
-	// console.log(newNote);
-	let newCategory = new Category({
-		name: req.body.category
-	}) 
+		console.log('nuværende cat', currentCategory);
 
-	// console.log(categories);
-
-	console.log(newCategory);
-
-	newNote.save((err: any) => {
-		if (err) throw err;
-		res.json({ success: true, mes: 'Note added', object: req.body });
-	});
+		let newNote = new Note({
+			createdDate: req.body.date,
+			title: req.body.title,
+			body: req.body.body,
+			user: decoded.payload,
+			category: currentCategory
+		});	
+		newNote.save((err: any) => {
+			if (err) throw err;
+			res.json({ success: true, mes: 'Note added', object: req.body });
+		});	
+	})
 }
 
 export let del = (req: Request, res: Response) => {
@@ -68,7 +75,7 @@ export let del = (req: Request, res: Response) => {
 	// console.log(req.params.id);
 	Note.findByIdAndRemove(noteId, (err, note) => {
 		if (err) throw err;
-		console.log(noteId + ' Note deleted');
+		// console.log(noteId + ' Note deleted');
 		res.status(200).json(note);
 	});
 }

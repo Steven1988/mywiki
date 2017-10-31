@@ -15,9 +15,9 @@ const routes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'users', component: UsersComponent },
-	{ path: 'users/addUser', component: AddUserComponent },
+	{ path: 'users/add-user', component: AddUserComponent },
 	{ path: 'notes', component: NotesComponent },
-	{ path: 'notes/addNote', component: AddNoteComponent },
+	{ path: 'notes/add-note', component: AddNoteComponent },
 	{ path: 'tutorials', component: ReactiveFormsComponent }
 ];
 
